@@ -16,16 +16,22 @@ with open(election_data) as csvfile:
     for row in csvreader:
         Totvotes = Totvotes + 1
         candidate = row[2]
-        if candidate not in Candvotes:
+        if candidate not in Candvotes: #Gracias Emilio!!!
             Candvotes[candidate] = 1
         else:
             Candvotes[candidate] += 1
+        # if candidate in Candvotes:    ***old ver that did not work***
+        #     Candvotes[candidate] = Candvotes[candidate] + 1
+        # else:
+        #     Candvotes[candidate] = 1
 # loop for percentages
+
 for k, v in Candvotes.items():
     Cperct += f'{k}: {"{:.3%}".format(v/Totvotes)} ({v}) \n'
     if v > Wvotes:
         Wvotes = v
         Winner = k
+  
 dashbreak = "---------------------------------------"
 print("election result")
 print(dashbreak)
@@ -41,7 +47,7 @@ with open (filepath,'w') as text:
     text.write(f"total votes: {Totvotes}" + "\n")
     text.write("dashbreak" + "\n")
     for name, votecount in Candvotes.items():
-        text.write(f"{name}: {Cperct[name]}(votecount)" + "\n")
+        text.write(f"{name}: Cperct[name](votecount)" + "\n")
         text.write("dashbreak" + "\n")
         text.write(f"Winner:" + "\n")
         text.write("dashbreak" + "\n")
